@@ -7,10 +7,12 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
+function createShoppingCart() {
+  alert('You clicked the first ListGroupItem');
+}
 
-class App extends React.Component{
-  render()
-  {
+class App extends React.Component {
+  render() {
     return (
       <Accordion defaultActiveKey="0">
         <Card>
@@ -23,7 +25,6 @@ class App extends React.Component{
                 <ListGroup.Item as="li" >
                   1 cup chocolate hazelnut spread (Recommended: Nutella)
                 </ListGroup.Item>
-                <ListGroup.Item as="li">Dapibus ac facilisis in</ListGroup.Item>
                 <ListGroup.Item as="li" >
                   2 eggs
                 </ListGroup.Item>
@@ -45,7 +46,7 @@ class App extends React.Component{
                   How many servings per recipe?
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item>1</Dropdown.Item>
+                  <Dropdown.Item href="#/action-1">1</Dropdown.Item>
                   <Dropdown.Item href="#/action-2">2</Dropdown.Item>
                   <Dropdown.Item href="#/action-3">3</Dropdown.Item>
                   <Dropdown.Item href="#/action-4">4</Dropdown.Item>
@@ -66,7 +67,3 @@ export default App;
 
 
 
-
-function createShoppingCart() {
-  alert('You pressed the first button.')
-}
