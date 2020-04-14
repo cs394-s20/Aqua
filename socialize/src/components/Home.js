@@ -103,7 +103,7 @@ class Home extends React.Component {
                 <IngredientList ingredients={this.state.ingredients} />
                 <div className = "OptionHolder">
                
-                <Button>Vegeterianize</Button>
+                <Button className="veg-butt">Vegeterianize</Button>
                   <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                       How many servings per recipe?
