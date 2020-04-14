@@ -11,7 +11,7 @@ def hello_world():
 
 @app.route('/get_recipes')
 def get_recipes():
-    recipeId = request.headers['recipeId']
+    recipeId = request.headers
     print(recipeId)
     print(RecipeGrabber.GrabFromRemote("https://www.allrecipes.com/recipe/20995/"))
 

@@ -6,8 +6,6 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-import data from './data/recipes.json';
-
 const index = 1;
 
 const IngredientList = ({ingredients}) => (
@@ -31,19 +29,52 @@ class App extends React.Component{
       ingredients: []
     };
   }
-
   componentDidMount() {
-    fetch('/get_recipes', {
-      mode: 'no-cors',
-      recipeId: '20995'
-    }).then(res => res.json())
-    .then(data => {
-      this.setState({
-        recipe: data[index],
-        recipeName: data[index]["name"],
-        ingredients: data[index]["ingredients"]
-      });
-    });
+    //   fetch('/get_recipes', {
+    //   mode: 'no-cors',
+    //   recipeId: '20995',
+    // }).then(res => res.json()).then((data) => {
+    //   this.setState({
+    //     recipe: data[index],
+    //     recipeName: data[index]["name"],
+    //     ingredients: data[index]["ingredients"]
+    //   });
+    // });
+    this.setState({
+      recipeName: "Chocolate-spread Pancake Recipe",
+      ingredients: [
+        {
+          "item": "chocolate hazelnut spread (Recommended: Nutella)",
+          "amount": 1,
+          "measurement": "cup"
+        },
+        {
+          "item": "eggs",
+          "amount": 2,
+          "measurement": null
+        },
+        {
+          "item": "milk",
+          "amount": 1,
+          "measurement": "cup"
+        },
+        {
+          "item": "salt",
+          "amount": 1,
+          "measurement": "pinch"
+        },
+        {
+          "item": "vegetable oil (Recommended: Olive Oil)",
+          "amount": 2.5,
+          "measurement": "teaspoons"
+        },
+        {
+          "item": "all-purpose flour",
+          "amount": 0.666,
+          "measurement": "cup"
+        }
+      ]
+    })
   }
 
   render()
@@ -56,7 +87,7 @@ class App extends React.Component{
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
-              <IngredientList ingredients = this.ingredients/>
+              <IngredientList ingredients ={this.state.ingredients}/>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   How many servings per recipe?
