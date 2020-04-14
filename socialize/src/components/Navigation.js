@@ -12,7 +12,7 @@ const Navigation = () => {
     <div>
       <div className='navig'>
         <Navbar bg="dark" variant="dark" className='navig'>
-          <Navbar.Brand href="#recipe"><NavLink to="/">EasyHealthy</NavLink></Navbar.Brand>
+          <Navbar.Brand href="#recipe"><NavLink to="/" style={{color: "white"}}>EasyHealthy</NavLink></Navbar.Brand>
           <Nav className="mr-auto">
             {/* <Nav.Link href="#recipe">Recipe</Nav.Link> */}
             {/* <Nav.Link href="#shoppingcart">ShoppingCart</Nav.Link> */}
