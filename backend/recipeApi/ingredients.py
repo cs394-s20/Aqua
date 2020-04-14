@@ -23,6 +23,15 @@ class Ingredient:
             base += "  (Preparations: " + self.preparations + ")"
         return base
 
+    def serialize(self):
+        return {
+            "quantity": self.quantity,
+            "measurement": self.measurement,
+            "ingredient": self.ingredient,
+            "preparations": self.preparations,
+            "descriptions": self.descriptions,
+        }
+
     def multiply_quantity(self, multiplier):
         if self.quantity != 0:
             old_quantity = self.quantity

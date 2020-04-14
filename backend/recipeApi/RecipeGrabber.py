@@ -26,6 +26,9 @@ def GrabFromRemote(url):
     time = steps[0:3]
     steps = steps[3:]
 
+    servings = soup.find('section', {'class': "adjustServings"}).findChildren('div')[0].get_text()
+    servings = int(servings.split()[3])
+
     i = 0
     while i < len(steps):
         steps[i] = re.split("(?:\. |; |! )",steps[i])
@@ -46,7 +49,7 @@ def GrabFromRemote(url):
         notes = re.sub("^@F.*\n","",notes)
 
     nutr = notesAndNutr[notesAndNutr.index("ing:")+4:notesAndNutr.index(".\nFull")].split(";\n")
-    recipe = Recipe(title,ingredients,steps,notes,nutr,time)
+    recipe = Recipe(title,ingredients,steps,notes,nutr,time,servings)
     #print(recipe.title,recipe.ingredients,recipe.directions,recipe.notes,recipe.nutrition,recipe.timing)
 
     return recipe

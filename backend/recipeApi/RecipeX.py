@@ -1,6 +1,6 @@
 class Recipe(object):
-    def __init__(self,titl,ing,step,note,nutr,tim):
-        super(Recipe,self)
+    def __init__(self,titl,ing,step,note,nutr,tim, serving):
+        super(Recipe, self)
         #List of Ingredients, Including Quantities
         self.ingredients = ing
         #Title of Recipe
@@ -16,17 +16,30 @@ class Recipe(object):
         # #Tools used in making the recipe
         self.tools = []
         self.steps = []
-        self.pm = None 
+        self.pm = None
+        self.servings = serving
 
     def change_servings(self, multiplier):
         for ingredient in self.ingredients:
             ingredient.multiply_quantity(multiplier)
+        self.servings = int(self.servings * multiplier)
 
     def halve(self):
         self.change_servings(.5)
 
     def double(self):
         self.change_servings(2)
+
+    def serialize(self):
+        return {"ingredients": [ingredient.serialize() for ingredient in self.ingredients],
+                "title": self.title,
+                "directions": self.directions,
+                "notes": self.notes,
+                "nutrition": self.nutrition,
+                "timing": self.timing,
+                "tools": self.tools,
+                "steps": self.steps,
+                "servings": self.servings}
     
     def __repr__(self):
         ingreds = "\n".join([str(ing) for ing in self.ingredients])
