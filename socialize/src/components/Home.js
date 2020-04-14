@@ -5,11 +5,6 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
 
 
 // const index = 1;
@@ -86,19 +81,6 @@ class Home extends React.Component {
   render() {
     return (
       <div className='container'>
-        <div className='navig'>
-          <Navbar bg="dark" variant="dark" className='navig'>
-            <Navbar.Brand href="#recipe">EasyHealthy</Navbar.Brand>
-            <Nav className="mr-auto">
-              <Nav.Link href="#recipe">Recipe</Nav.Link>
-              <Nav.Link href="#shoppingcart">ShoppingCart</Nav.Link>
-            </Nav>
-            <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-info">Search</Button>
-            </Form>
-          </Navbar>
-        </div>
         <Accordion defaultActiveKey="0">
           <Card>
             <Accordion.Toggle as={Card.Header} eventKey="0">
