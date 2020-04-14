@@ -36,7 +36,3 @@ class App extends React.Component{
 
 export default App;
 
-
-function createShoppingCart() {
-  alert('You pressed the first button.')
-}
