@@ -5,6 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
 
 
 // const index = 1;
@@ -15,6 +16,17 @@ const IngredientList = ({ ingredients }) => (
       return (
         <ListGroup.Item as="li">
           {ingredient["amount"]} {ingredient["measurement"]} {ingredient["item"]}
+        </ListGroup.Item>
+      )
+    })}
+  </ListGroup>
+);
+const Instructions = ({ instructions }) => (
+  <ListGroup as="ul">
+    {instructions.map((instruction) => {
+      return (
+        <ListGroup.Item as="li">
+          {/* {instruction["amount"]} */}
         </ListGroup.Item>
       )
     })}
@@ -89,18 +101,22 @@ class Home extends React.Component {
             <Accordion.Collapse eventKey="0">
               <Card.Body>
                 <IngredientList ingredients={this.state.ingredients} />
-                <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    How many servings per recipe?
+                <div className = "OptionHolder">
+               
+                <Button>Vegeterianize</Button>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      How many servings per recipe?
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>1</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">2</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">3</Dropdown.Item>
-                    <Dropdown.Item href="#/action-4">4</Dropdown.Item>
-                    <Dropdown.Item >5</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                    <Dropdown.Menu>
+                      <Dropdown.Item>1</Dropdown.Item>
+                      <Dropdown.Item href="#/action-2">2</Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">3</Dropdown.Item>
+                      <Dropdown.Item href="#/action-4">4</Dropdown.Item>
+                      <Dropdown.Item >5</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
               </Card.Body>
             </Accordion.Collapse>
           </Card>
