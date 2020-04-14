@@ -11,26 +11,32 @@ import Button from 'react-bootstrap/Button';
 // const index = 1;
 
 const IngredientList = ({ ingredients }) => (
-  <ListGroup as="ul">
-    {ingredients.map((ingredient) => {
-      return (
-        <ListGroup.Item as="li">
-          {ingredient["amount"]} {ingredient["measurement"]} {ingredient["item"]}
-        </ListGroup.Item>
-      )
-    })}
-  </ListGroup>
+  <div>
+    <h1>Ingredients</h1>
+    <ListGroup as="ul">
+      {ingredients.map((ingredient) => {
+        return (
+          <ListGroup.Item as="li">
+            {ingredient["amount"]} {ingredient["measurement"]} {ingredient["item"]}
+          </ListGroup.Item>
+        )
+      })}
+    </ListGroup>
+  </div>
 );
 const Instructions = ({ instructions }) => (
-  <ListGroup as="ul">
-    {instructions.map((instruction) => {
-      return (
-        <ListGroup.Item as="li">
-          {/* {instruction["amount"]} */}
-        </ListGroup.Item>
-      )
-    })}
-  </ListGroup>
+  <div>
+    <h1>Instructions</h1>
+    <ListGroup as="ul">
+      {instructions.map((instruction) => {
+        return (
+          <ListGroup.Item as="li">
+            {instruction["action"]}
+          </ListGroup.Item>
+        )
+      })}
+    </ListGroup>
+  </div>
 );
 
 class Home extends React.Component {
@@ -39,7 +45,8 @@ class Home extends React.Component {
     this.state = {
       recipe: {},
       recipeName: "",
-      ingredients: []
+      ingredients: [], 
+      instructions: []
     };
   }
   componentDidMount() {
@@ -55,6 +62,15 @@ class Home extends React.Component {
     // });
     this.setState({
       recipeName: "Chocolate-spread Pancake Recipe",
+      instructions: [
+        {
+          "action": "In a blender combine eggs, milk, flour, salt and oil. Process until smooth. Cover and refrigerate 1 hour."
+        },
+
+        {
+          "action": "Heat a skillet over medium-high heat and brush with oil. Pour 1/4 cup of crepe batter into pan, tilting to completely coat the surface of the pan. Cook 2 to 5 minutes, turning once, until golden. Repeat with remaining batter."
+        },
+      ],
       ingredients: [
         {
           "item": "chocolate hazelnut spread (Recommended: Nutella)",
@@ -101,6 +117,7 @@ class Home extends React.Component {
             <Accordion.Collapse eventKey="0">
               <Card.Body>
                 <IngredientList ingredients={this.state.ingredients} />
+                <Instructions instructions={this.state.instructions} />
                 <div className = "OptionHolder">
                
                 <Button className="veg-butt">Vegeterianize</Button>
