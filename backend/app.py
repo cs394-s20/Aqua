@@ -1,5 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from recipeApi import RecipeGrabber
+from recipeApi.Transform import *
 
 app = Flask(__name__)
 
@@ -9,67 +10,19 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/get_recipes')
-def get_recipes():
-    recipeId = request.headers
-    print(recipeId)
-    print(RecipeGrabber.GrabFromRemote("https://www.allrecipes.com/recipe/20995/"))
+@app.route('/get_recipe')
+def get_recipe():
+    recipe_id = request.args.get("recipeId")
+    vegetarian = request.args.get("vegetarian")
+    servings = int(request.args.get("servings"))
 
-    return {
-  0:{
-    "name": "Chocolate-spread Pancake Recipe",
-    "ingredients":
-    [
-      {
-        "item": "chocolate hazelnut spread (Recommended: Nutella)",
-        "amount": 1,
-        "measurement": "cup"
-      },
-      {
-        "item": "eggs",
-        "amount": 2,
-        "measurement": None
-      },
-      {
-        "item": "milk",
-        "amount": 1,
-        "measurement": "cup"
-      },
-      {
-        "item": "salt",
-        "amount": 1,
-        "measurement": "pinch"
-      },
-      {
-        "item": "vegetable oil (Recommended: Olive Oil)",
-        "amount": 2.5,
-        "measurement": "teaspoons"
-      },
-      {
-        "item": "all-purpose flour",
-        "amount": 0.666,
-        "measurement": "cup"
-      }
-    ]
-  },
-      1: {
-        "name": "Choqge Recipe",
-        "ingredients":
-          [
-            {
-              "item": "chocolqgqrgended: Nutella)",
-              "amount": 124,
-              "measurement": "cup"
-            },
-            {
-              "item": "qrggrq",
-              "amount": 226,
-              "measurement": None
-            }
-          ]
-      }
-}
+    recipe = RecipeGrabber.GrabFromRemote("https://www.allrecipes.com/recipe/" + str(recipe_id) + "/")
+    multiplier = servings / recipe.servings
+    if vegetarian == "true":
+        recipe = ToVegetarian(recipe)
+    recipe.change_servings(multiplier)
 
+    return jsonify(recipe.serialize())
 
 
 if __name__ == '__main__':

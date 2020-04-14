@@ -13,7 +13,7 @@ const IngredientList = ({ingredients}) => (
     {ingredients.map((ingredient) => {
       return (
         <ListGroup.Item as="li">
-          {ingredient["amount"]} {ingredient["measurement"]} {ingredient["item"]}
+          {ingredient["quantity"] == 0 ? ("") : (ingredient["quantity"] + " " + ingredient["measurement"] + " of ")}{ingredient["ingredient"]}
         </ListGroup.Item>
       )
     })}
@@ -24,57 +24,58 @@ class App extends React.Component{
   constructor() {
     super();
     this.state = {
-      recipe: {},
-      recipeName: "",
-      ingredients: []
+      recipe: {
+        'title': "",
+        'ingredients': []
+      },
+      recipeId: 279536,
+      vegetarian: true,
+      servings: 5
     };
   }
   componentDidMount() {
-    //   fetch('/get_recipes', {
-    //   mode: 'no-cors',
-    //   recipeId: '20995',
-    // }).then(res => res.json()).then((data) => {
-    //   this.setState({
-    //     recipe: data[index],
-    //     recipeName: data[index]["name"],
-    //     ingredients: data[index]["ingredients"]
-    //   });
-    // });
-    this.setState({
-      recipeName: "Chocolate-spread Pancake Recipe",
-      ingredients: [
-        {
-          "item": "chocolate hazelnut spread (Recommended: Nutella)",
-          "amount": 1,
-          "measurement": "cup"
-        },
-        {
-          "item": "eggs",
-          "amount": 2,
-          "measurement": null
-        },
-        {
-          "item": "milk",
-          "amount": 1,
-          "measurement": "cup"
-        },
-        {
-          "item": "salt",
-          "amount": 1,
-          "measurement": "pinch"
-        },
-        {
-          "item": "vegetable oil (Recommended: Olive Oil)",
-          "amount": 2.5,
-          "measurement": "teaspoons"
-        },
-        {
-          "item": "all-purpose flour",
-          "amount": 0.666,
-          "measurement": "cup"
-        }
-      ]
-    })
+      fetch('/get_recipe?recipeId=' + this.state.recipeId + '&vegetarian=' + this.state.vegetarian + '&servings=' + this.state.servings, {
+      mode: 'no-cors',
+    }).then(res => res.json()).then((data) => {
+      this.setState({
+        recipe: data
+      });
+    });
+    // this.setState({
+    //   recipeName: "Chocolate-spread Pancake Recipe",
+    //   ingredients: [
+    //     {
+    //       "item": "chocolate hazelnut spread (Recommended: Nutella)",
+    //       "amount": 1,
+    //       "measurement": "cup"
+    //     },
+    //     {
+    //       "item": "eggs",
+    //       "amount": 2,
+    //       "measurement": null
+    //     },
+    //     {
+    //       "item": "milk",
+    //       "amount": 1,
+    //       "measurement": "cup"
+    //     },
+    //     {
+    //       "item": "salt",
+    //       "amount": 1,
+    //       "measurement": "pinch"
+    //     },
+    //     {
+    //       "item": "vegetable oil (Recommended: Olive Oil)",
+    //       "amount": 2.5,
+    //       "measurement": "teaspoons"
+    //     },
+    //     {
+    //       "item": "all-purpose flour",
+    //       "amount": 0.666,
+    //       "measurement": "cup"
+    //     }
+    //   ]
+    // })
   }
 
   render()
@@ -83,11 +84,11 @@ class App extends React.Component{
       <Accordion defaultActiveKey="0">
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="0">
-            {this.state.recipeName}
+            {this.state.recipe['title']}
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
-              <IngredientList ingredients ={this.state.ingredients}/>
+              <IngredientList ingredients ={this.state.recipe['ingredients']}/>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   How many servings per recipe?
